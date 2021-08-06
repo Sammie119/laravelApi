@@ -23,11 +23,11 @@ Route::get('/users', [UserController::class, 'index']);
 
 Route::post('/user', [UserController::class, 'store']);
 
-Route::get('/users/{id}', [UserController::class, 'show']);
+Route::get('/users/{user_id}', [UserController::class, 'show']);
 
-Route::put('/users/{id}', [UserController::class, 'update']);
+Route::put('/users/{user_id}', [UserController::class, 'update']);
 
-Route::delete('/users/{id}', [UserController::class, 'destroy']);
+Route::delete('/users/{user_id}', [UserController::class, 'destroy']);
 
 
 

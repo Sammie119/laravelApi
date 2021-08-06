@@ -52,9 +52,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($user_id)
     {
-        $user = User::findOrFail($id);
+        $user = User::findOrFail($user_id);
         return new UserResource($user);
     }
 
@@ -64,7 +64,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($user_id)
     {
         //
     }
@@ -76,9 +76,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $user_id)
     {
-        $user = User::findOrFail($id);
+        $user = User::findOrFail($user_id);
         $user->username = $request->username;
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
@@ -93,9 +93,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($user_id)
     {
-        $user = User::findOrFail($id);
+        $user = User::findOrFail($user_id);
         if($user->delete()){
             return new UserResource($user);
         }
