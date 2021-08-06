@@ -18,7 +18,10 @@ class UserResource extends JsonResource
             'user_id' => (string)$this->user_id,
             'username' => $this->username,
             'first_name' => $this->first_name,
-            'last_name' => $this->last_name
+            'last_name' => $this->last_name,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+            'deleted_at' => $this->deleted_at
         ];
     }
 }
