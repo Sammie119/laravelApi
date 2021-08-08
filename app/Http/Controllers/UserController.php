@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -37,13 +38,31 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User();
-        $user->username = $request->username;
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        if($user->save()){
-            return new UserResource($user);
+        $validator = Validator::make($request->all(), [
+            'username' => 'required|unique:users|max:50',
+            'first_name' => 'required|max:100',
+            'last_name' => 'required|max:100'
+        ]);
+
+        if($validator->fails()) {
+            $errors = $validator->errors();
+            return $errors->toJson();
         }
+        // $user = new User();
+        // $user->username = $request->input('username');
+        // $user->first_name = $request->input('first_name');
+        // $user->last_name = $request->input('last_name');
+        // if($user->save()){
+        //     return new UserResource($user);
+        // }
+
+        $user = User::create([
+            'username' => $request->input('username'),
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name')
+        ]);
+
+        return new UserResource($user);
     }
 
     /**
@@ -78,6 +97,17 @@ class UserController extends Controller
      */
     public function update(Request $request, $user_id)
     {
+        $validator = Validator::make($request->all(), [
+            'username' => 'required|unique:users|max:50',
+            'first_name' => 'required|max:100',
+            'last_name' => 'required|max:100'
+        ]);
+
+        if($validator->fails()) {
+            $errors = $validator->errors();
+            return $errors->toJson();
+        }
+
         $user = User::findOrFail($user_id);
         $user->username = $request->username;
         $user->first_name = $request->first_name;
@@ -85,6 +115,7 @@ class UserController extends Controller
         if($user->save()){
             return new UserResource($user);
         }
+        
     }
 
     /**

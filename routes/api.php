@@ -19,15 +19,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/users', [UserController::class, 'index']);
+// Route::get('/users', [UserController::class, 'index']);
 
-Route::post('/user', [UserController::class, 'store']);
+// Route::post('/user', [UserController::class, 'store']);
 
-Route::get('/users/{user_id}', [UserController::class, 'show']);
+// Route::get('/users/{user_id}', [UserController::class, 'show']);
 
-Route::put('/users/{user_id}', [UserController::class, 'update']);
+// Route::put('/users/{user_id}', [UserController::class, 'update']);
 
-Route::delete('/users/{user_id}', [UserController::class, 'destroy']);
+// Route::delete('/users/{user_id}', [UserController::class, 'destroy']);
+
+Route::apiResource('/users', UserController::class);
 
 
 
